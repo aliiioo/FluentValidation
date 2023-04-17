@@ -1,4 +1,5 @@
 ﻿using FluentValidationing.DTOs;
+using FluentValidationing.Validations;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -18,11 +19,15 @@ namespace FluentValidation.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public async Task<IActionResult> Index(RegisterViewModel registerViewModel)
         {
-            return View();
-        }
+            var Validation = new RegisterValidation();
+            var result=await Validation.ValidateAsync(registerViewModel,x=>x.IncludeRuleSets("Bearth"));
 
+
+             return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -25,12 +25,19 @@ namespace FluentValidationing.Validations
             RuleFor(x => x.Age).NotEmpty()
                 .Must(x => x > 16 && x<50);
 
-            RuleFor(x => x.BearthDay).NotEmpty()
-                .NotNull()
-                .NotEqual(DateTime.Now).WithMessage("Enter your Date of Braeth cerrect !");
+
+            // This field is not required and is optional 
+            // When we need to use it, I give it to the input of this class with the name we gave it
+
+            RuleSet("Bearth", () =>
+            {
+                RuleFor(x => x.BearthDay).NotEmpty()
+              .NotNull()
+              .NotEqual(DateTime.Now).WithMessage("Enter your Date of Braeth cerrect !");
+            });         
 
 
-            // Validation List in our ViewModel
+            // Validation List
 
             RuleForEach(x => x.course).SetValidator(new CourseValidations());
 
