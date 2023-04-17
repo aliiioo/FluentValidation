@@ -1,4 +1,4 @@
-﻿using FluentValidation.Models;
+﻿using FluentValidationing.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
