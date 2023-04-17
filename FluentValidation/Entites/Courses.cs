@@ -8,7 +8,6 @@
 
 
         #region Relation
-
         public int Studentid { get; set; }
         public Students students { get; set; }
         #endregion

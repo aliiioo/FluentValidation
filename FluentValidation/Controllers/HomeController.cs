@@ -22,9 +22,9 @@ namespace FluentValidation.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(RegisterViewModel registerViewModel)
         {
+            // We should get Inforamtion from View 
             var Validation = new RegisterValidation();
             var result=await Validation.ValidateAsync(registerViewModel,x=>x.IncludeRuleSets("Bearth"));
-
             if (!result.IsValid)
             {
                 return BadRequest(result.Errors[0].ErrorMessage);

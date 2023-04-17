@@ -7,11 +7,11 @@ namespace FluentValidationing.Validations
 {
     public class RegisterValidation : AbstractValidator<RegisterViewModel>
     {
-        private readonly StuentServices _StuentServices;
+        
 
-        public RegisterValidation(StuentServices StuentServices)
+        public RegisterValidation()
         {
-            _StuentServices=StuentServices;
+            
             //valdation propertic
 
             RuleFor(x => x.Name).NotEmpty()
@@ -38,10 +38,7 @@ namespace FluentValidationing.Validations
                 RuleFor(x => x.Email).Null();
             }).Otherwise(() =>
             {
-                RuleFor(x => x.Email).NotEmpty().NotNull().EmailAddress()
-                // Checking DataBase 
-                // it checking database 
-                .Must(x => _StuentServices.IsExistEmail(x) == false);
+                RuleFor(x => x.Email).NotEmpty().NotNull().EmailAddress();
                 RuleFor(x => x.PhoneNumber).Null();
             });
 
