@@ -1,26 +1,31 @@
 ﻿using FluentValidation;
 using FluentValidationing.DTOs;
+using FluentValidationing.Services;
+
 
 namespace FluentValidationing.Validations
 {
-    public class RegisterValidation:AbstractValidator<RegisterViewModel>
+    public class RegisterValidation : AbstractValidator<RegisterViewModel>
     {
-        public RegisterValidation()
+        private readonly StuentServices _StuentServices;
+
+        public RegisterValidation(StuentServices StuentServices)
         {
+            _StuentServices=StuentServices;
             //valdation propertic
-            
-            RuleFor(x=>x.Name).NotEmpty()
+
+            RuleFor(x => x.Name).NotEmpty()
                 .WithMessage("Enter your Name")
                 .MaximumLength(50)
                 .MinimumLength(2);
 
-            RuleFor(x=>x.Familty).NotEmpty()
+            RuleFor(x => x.Familty).NotEmpty()
                 .WithMessage("Enter your Lastname")
                 .MinimumLength(120);
 
 
             RuleFor(x => x.Age).NotEmpty()
-                .Must(x => x > 16 && x<50);
+                .Must(x => x > 16 && x < 50);
 
 
             // Conditional validation
@@ -33,7 +38,10 @@ namespace FluentValidationing.Validations
                 RuleFor(x => x.Email).Null();
             }).Otherwise(() =>
             {
-                RuleFor(x => x.Email).NotEmpty().NotNull().EmailAddress();
+                RuleFor(x => x.Email).NotEmpty().NotNull().EmailAddress()
+                // Checking DataBase 
+                // it checking database 
+                .Must(x => _StuentServices.IsExistEmail(x) == false);
                 RuleFor(x => x.PhoneNumber).Null();
             });
 
@@ -46,7 +54,7 @@ namespace FluentValidationing.Validations
                 RuleFor(x => x.BearthDay).NotEmpty()
               .NotNull()
               .NotEqual(DateTime.Now).WithMessage("Enter your Date of Braeth cerrect !");
-            });         
+            });
 
 
             // Validation List
@@ -57,7 +65,7 @@ namespace FluentValidationing.Validations
         }
     }
 
-    public  class CourseValidations : AbstractValidator<CourseViewModel>
+    public class CourseValidations : AbstractValidator<CourseViewModel>
     {
         public CourseValidations()
         {
