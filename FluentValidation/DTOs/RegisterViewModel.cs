@@ -11,5 +11,7 @@
         public int Age { get; set; }
 
         public DateTime BearthDay { get; set; }
+
+        public List<CourseViewModel> course { get; set; }
     }
 }

@@ -7,6 +7,8 @@ namespace FluentValidationing.Validations
     {
         public RegisterValidation()
         {
+            //valdation propertic
+            
             RuleFor(x=>x.Name).NotEmpty()
                 .WithMessage("Enter your Name")
                 .MaximumLength(50)
@@ -28,8 +30,19 @@ namespace FluentValidationing.Validations
                 .NotEqual(DateTime.Now).WithMessage("Enter your Date of Braeth cerrect !");
 
 
+            // Validation List in our ViewModel
+
+            RuleForEach(x => x.course).SetValidator(new CourseValidations());
 
 
+        }
+    }
+
+    public  class CourseValidations : AbstractValidator<CourseViewModel>
+    {
+        public CourseValidations()
+        {
+            RuleFor(x => x.CourseName).NotNull().NotEmpty();
         }
     }
 }
