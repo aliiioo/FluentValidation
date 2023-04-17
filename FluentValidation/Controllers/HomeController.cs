@@ -25,6 +25,10 @@ namespace FluentValidation.Controllers
             var Validation = new RegisterValidation();
             var result=await Validation.ValidateAsync(registerViewModel,x=>x.IncludeRuleSets("Bearth"));
 
+            if (!result.IsValid)
+            {
+                return BadRequest(result.Errors[0].ErrorMessage);
+            }
 
              return View();
         }

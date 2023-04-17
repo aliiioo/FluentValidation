@@ -12,6 +12,8 @@
 
         public DateTime BearthDay { get; set; }
 
+        public string Email { get; set; }
+
         public List<CourseViewModel> course { get; set; }
     }
 }

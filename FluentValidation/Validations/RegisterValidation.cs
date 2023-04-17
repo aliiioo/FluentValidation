@@ -18,12 +18,24 @@ namespace FluentValidationing.Validations
                 .WithMessage("Enter your Lastname")
                 .MinimumLength(120);
 
-            RuleFor(x => x.PhoneNumber).NotEmpty()
-                 .WithMessage("Enter your PhoneNumber")
-                 .Length(10, 13);
 
             RuleFor(x => x.Age).NotEmpty()
                 .Must(x => x > 16 && x<50);
+
+
+            // Conditional validation
+            //Once we have entered the number, we can no longer enter the email, we only have the right to choose one of them
+            When(x => !string.IsNullOrEmpty(x.PhoneNumber), () =>
+            {
+                RuleFor(x => x.PhoneNumber).NotEmpty()
+               .WithMessage("Enter your PhoneNumber")
+               .Length(10, 13);
+                RuleFor(x => x.Email).Null();
+            }).Otherwise(() =>
+            {
+                RuleFor(x => x.Email).NotEmpty().NotNull().EmailAddress();
+                RuleFor(x => x.PhoneNumber).Null();
+            });
 
 
             // This field is not required and is optional 
