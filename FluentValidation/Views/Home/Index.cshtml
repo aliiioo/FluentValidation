@@ -1,7 +1,7 @@
 ﻿
 @model RegisterViewModel
 <div class="d-lg-flex half">
-    <div class="bg order-1 order-md-2" style="background-image: url('/Login/images/bg_1.jpg');"></div>
+    <div class="bg order-1 order-md-2" style="background-image: url('/Login/images/bg_2.jpg');"></div>
     <div class="contents order-2 order-md-1">
 
       <div class="container">
@@ -12,34 +12,34 @@
             </div>
             <form asp-action="Register" method="post">
               <div class="form-group first">
-                <label >نام</label>
-                <input type="email" class="form-control" >
-              </div>
-              <br />
-               <div class="form-group first">
-                <label >نام خانوادگی</label>
+                <label >Name</label>
                 <input type="text" class="form-control" >
               </div>
               <br />
                <div class="form-group first">
-                <label >شماره تماس</label>
+                <label >Last Name</label>
+                <input type="text" class="form-control" >
+              </div>
+              <br />
+               <div class="form-group first">
+                <label >Phone Number</label>
                 <input type="text" class="form-control" >
               </div>
               <br />
               <div class="form-group last mb-3">
-                <label >ایمیل</label>
+                <label >Email</label>
                 <input type="email" class="form-control" >
               </div>
               <div class="form-group last mb-3">
-                <label >سن</label>
-                <input type="email" class="form-control" >
+                <label >Age</label>
+                <input type="text" class="form-control" >
               </div>
               <div class="form-group last mb-3">
-                <label >تاریخ تولد</label>
+                <label >BearthDay</label>
                 <input type="datetime" class="form-control" >
               </div>
               
-              <input type="submit" value="ثبت نام" class="btn btn-block btn-primary">
+              <input type="submit" value="Submit" class="btn btn-block btn-primary">
               <div class="social-login">
               </div>
             </form>
